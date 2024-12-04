@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="p-8" x-data="{
+    jobList: [
+     {
+      id: 1,
+      title: 'Back End Developer',
+      type: 'Full-time',
+      location: 'Remote',
+      category: 'Engineering'
+     },
+     {
+      id: 2,
+      title: 'Front End Developer',
+      type: 'Part-time',
+      location: 'Remote',
+      category: 'Engineering'
+     }
+    ],
+
+    activeJob:  {
+      title: 'Front End Developer',
+      type: 'Part-time',
+      location: 'Remote',
+      category: 'Engineering'
+     }
+  }">
+    <div class="flex justify-between items-center mb-4" >
+      <h1 class="text-xl font-semibold">Job Postings</h1>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+        Create new job
+      </button>
+    </div>
+    <template x-for="job in jobList">
+      <div class="space-y-4">
+        <!-- Job Posting -->
+        <div class="flex justify-between items-center bg-white p-4 rounded-md shadow-md">
+          <!-- Job Details -->
+          <div>
+            <h2 class="text-lg font-medium text-blue-600 cursor-pointer hover:underline" x-text="job.title"></h2>
+            <p class="text-gray-500 text-sm" x-text="job.category"></p>
+          </div>
+    
+          <!-- Job Tags and Actions -->
+          <div class="flex items-center space-x-4">
+            <!-- Tags -->
+            <span class="px-2 py-1 text-sm bg-green-100 text-green-700 rounded-md" x-text="job.type"></span>
+            <span class="text-gray-500 text-sm" x-text="job.location"></span>
+    
+            <!-- Icons -->
+            <button class="text-gray-500 hover:text-blue-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-4-4m0 0l4-4m-4 4h12" />
+              </svg>
+            </button>
+            <button class="text-gray-500 hover:text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+    
+      </div>
+    </template>
+
+    <!-- Model -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+      <div class="bg-white rounded-lg p-6 w-96 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Add new job</h3>
+        <form>
+          <div class="mb-4">
+            <label for="jobTitle" class="block text-sm font-medium text-gray-700 mb-2">Job title</label>
+            <input id="jobTitle" x-model="activeJob.title" type="text" placeholder="Graphic Designer"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          </div>
+          <div class="mb-4">
+            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+            <select id="category"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              x-model="activeJob.category">
+              <option>Design</option>
+              <option>Engineering</option>
+              <option>Marketing</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="type" x-model="activeJob.type" class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+            <select id="type"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contract</option>
+            </select>
+          </div>
+          <div class="mb-6">
+            <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+            <select id="location" x-model="activeJob.location"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <option>Remote</option>
+              <option>Australia</option>
+              <option>United States</option>
+            </select>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Cancel</button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Post job</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
